@@ -1,0 +1,173 @@
+# CV content. Edit this file, then run `npm run build`.
+# Text fields support **bold** for emphasis (use it for numbers).
+# Lists are newest first.
+
+meta:
+  accent: "#1D4E89"   # try #0F5C4E (teal), #7A2E3A (burgundy), #2B2F36 (charcoal)
+
+basics:
+  name: Felix Soewito
+  headline: Engineering Leader · QA, Backend, Mobile and Web
+  location: Jakarta, Indonesia
+  email: felix.soewito@gmail.com
+  links:
+    - label: linkedin.com/in/felix-soewito
+      url: https://www.linkedin.com/in/felix-soewito/
+
+summary: >-
+  Engineering leader with 10+ years in logistics technology at Ninja Van, from QA automation
+  engineer to Head of Engineering. Built and led a 41-person QA organization, then led QA across
+  Indonesia and Vietnam and all engineering in Indonesia. Combines hands-on technical depth with
+  people leadership; led an AI-assisted workflow rollout that cut cycle times by up to 75%.
+
+highlights:
+  - value: "41"
+    label: QA engineers at peak, incl. 3 managers
+  - value: "2"
+    label: "countries in QA scope: Indonesia and Vietnam"
+  - value: 23K
+    label: automated tests at 92% coverage
+  - value: 75%
+    label: max cycle-time cut from AI-assisted workflows
+
+skills:
+  - name: Leadership
+    items: >-
+      Roadmap, KPI and budget ownership; build-vs-buy decisions and SaaS vendor negotiation;
+      org design, hiring, performance calibration
+  - name: Quality engineering
+    items: >-
+      Automation-first QA; in-house test framework, device farm, test case management and
+      metrics dashboards replacing third-party SaaS; test runs in GitHub Actions
+  - name: Engineering
+    items: >-
+      Release management across mobile, backend and web; integration testing; custom two-factor
+      authentication for internal software; remote management of warehouse DWS
+      (dimension-weight scanning) machines
+  - name: AI tooling
+    items: >-
+      Claude Code, Antigravity, Claude Design; custom agent skills that standardize AI output;
+      MCP servers for AI-assisted debugging; custom design system
+
+experience:
+  - name: Ninja Van
+    location: Jakarta, Indonesia
+    period: 2016 – 2026
+    showPath: true
+    roles:
+      - title: Head of Engineering, Indonesia Tech Lab
+        tag: also Head of QA
+        start: Jul 2024
+        end: Nov 2026
+        bullets:
+          - >-
+            Took on all engineering in Indonesia, reporting to the CTO, while leading QA in
+            Indonesia and Vietnam: **36 people** (24 QA, 4 QA managers, 1 engineering manager,
+            5 developers, 2 designers).
+          - >-
+            After the Vietnam site closed in 2025, led the remaining **25-person** team (16 QA,
+            3 QA managers, 6 developers); owned Ops Hub development and QA across all **5**
+            product systems.
+          - >-
+            Rolled out AI-assisted tooling and automated workflows across **5 teams**, cutting
+            design, test and implementation cycle times by **up to 75%** (e.g. technical design
+            docs from 3 days to 1).
+          - >-
+            Redesigned data retention policies for the Middle Mile service, cutting storage cost
+            by **70%**.
+          - >-
+            Kept escaped defects at **near zero** per release as QA shrank from **41 to 19**
+            people, matching test scope to a slower, maintenance-mode delivery pace.
+          - >-
+            Built an in-house test case management system that replaced SmartBear
+            CucumberStudio, saving **$23K** per year.
+          - >-
+            Partnered with product, ops and regional teams on the architecture of
+            high-reliability systems across Ninja Van's platforms.
+
+      - title: QA Manager
+        start: May 2020
+        end: Jul 2024
+        bullets:
+          - >-
+            Grew and led a QA-only organization of **41 engineers** (3 QA managers, 8 direct
+            reports) at peak.
+          - >-
+            Raised automation coverage to **92%** across **23K** test cases (Appium Android,
+            Selenium Web, Rest Assured API) and cut the flaky-test rate from **30%** to **4%**.
+          - >-
+            Cut regression runtime from **4h** to **0.5–1h** with containerized parallel
+            execution and multithreading in Bamboo CI/CD.
+          - >-
+            Built an internal device farm running **28** parallel mobile tests on a customized
+            build of open-source STF (Smartphone Test Farm).
+          - >-
+            Shipped internal tools (bulk test data generators and cleaners, Kafka message
+            inspector, automated onboarding) that cut manual test-data setup, debugging and
+            onboarding effort.
+          - >-
+            Wrote ad-hoc Python scripts for the team: test data preparation, test report
+            analysis, and spreadsheets generated from Allure results.
+          - >-
+            Set QA workflow guidelines and test strategy, and ran performance reviews,
+            calibration and promotions for the organization.
+
+      - title: Senior Software Engineer
+        tag: Backend
+        start: Aug 2018
+        end: Apr 2020
+        bullets:
+          - >-
+            Moved from frontend to backend development, handing frontend work to the team, and
+            led **5 engineers** on the Middle Mile service, which runs connectivity between
+            warehouses.
+          - >-
+            Delivered the inter-warehouse network project, linking warehouses and separating
+            main hubs from stations.
+          - >-
+            Architected reporting microservices and ETL batch pipelines for customer financial
+            reconciliation, delivering accurate, configurable and reliable reports.
+
+      - title: Software Engineer
+        tag: Frontend
+        start: Oct 2016
+        end: Jul 2018
+        bullets:
+          - >-
+            Worked as a frontend engineer, building and maintaining web application features in
+            PHP and AngularJS.
+
+      - title: QA Automation Engineer
+        start: Apr 2016
+        end: Oct 2016
+        bullets:
+          - >-
+            Built a custom test automation framework in Java with Cucumber, Selenium, Appium and
+            Rest Assured, running web, mobile and API tests in Bamboo CI/CD.
+
+  - name: Kartuku
+    location: Jakarta, Indonesia
+    period: 2015 – 2016
+    roles:
+      - title: Software Engineer
+        start: "2015"
+        end: "2016"
+        bullets:
+          - >-
+            Built Electronic Data Capture (EDC) payment terminal software with the Ingenico SDK
+            and payment gateway integrations in Java Spring Boot.
+
+education:
+  - school: Bandung Institute of Technology
+    degree: B.Eng., Electronics Engineering
+    detail: GPA 3.82 / 4.00
+    start: "2010"
+    end: "2015"
+
+talks:
+  - title: Career Strategy
+    venue: Generasi Gigih
+    year: 2022
+  - title: All about Kafka
+    venue: ITB career
+    year: 2019

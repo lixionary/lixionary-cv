@@ -1,0 +1,25 @@
+{
+  "name": "lixionary-cv",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal CV generator: cv.yaml in, styled HTML page and A4 PDF out.",
+  "type": "module",
+  "scripts": {
+    "build": "tsx src/build.ts",
+    "html": "tsx src/build.ts --html-only",
+    "dev": "tsx src/build.ts --html-only --watch",
+    "check": "tsc --noEmit",
+    "setup": "playwright install chromium"
+  },
+  "dependencies": {
+    "@fontsource/inter": "5.1.0",
+    "playwright": "1.63.0",
+    "yaml": "2.6.1",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "tsx": "4.19.2",
+    "typescript": "5.7.2"
+  }
+}
