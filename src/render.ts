@@ -155,6 +155,7 @@ export function renderHtml(cv: CV, opts: { css: string; fontCss: string }): stri
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escape(cv.basics.name)} · CV</title>
+${cv.basics.headline ? `<meta name="description" content="${escape(cv.basics.name)}: ${escape(cv.basics.headline)}">` : ""}
 <style>
 ${opts.fontCss}
 ${opts.css}
@@ -162,6 +163,7 @@ ${opts.css}
 </style>
 </head>
 <body>
+<nav class="toolbar"><a href="cv.pdf" download>Download PDF</a></nav>
 <main class="sheet">
 ${join([masthead(cv), summary(cv), highlights(cv), skills(cv), experience(cv), educationAndTalks(cv)])}
 </main>

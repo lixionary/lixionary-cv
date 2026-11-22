@@ -2,6 +2,8 @@
 
 My CV as data. Edit `cv.yaml`, run one command, get a styled A4 PDF and a self-contained HTML page.
 
+Live: https://lixionary.github.io/lixionary-cv/ (PDF: https://lixionary.github.io/lixionary-cv/cv.pdf). Every push to `main` rebuilds and redeploys it via `.github/workflows/pages.yml`.
+
 ```
 cv.yaml ──▶ src/schema.ts (validate) ──▶ src/render.ts + src/styles.css ──▶ dist/index.html ──▶ Playwright ──▶ dist/cv.pdf
 ```
