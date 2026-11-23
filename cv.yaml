@@ -23,10 +23,10 @@ summary: >-
 highlights:
   - value: "41"
     label: QA engineers at peak, incl. 3 managers
-  - value: "2"
-    label: "countries in QA scope: Indonesia and Vietnam"
-  - value: 23K
-    label: automated tests at 92% coverage
+  - value: "6"
+    label: "countries of tech teams: Indonesia, Vietnam, India, Palestine, Russia, Singapore"
+  - value: 30% → 4%
+    label: flaky-test rate after a test-pyramid reshape and E2E hardening
   - value: 75%
     label: max cycle-time cut from AI-assisted workflows
 
@@ -37,7 +37,8 @@ skills:
       org design, hiring, performance calibration
   - name: Quality engineering
     items: >-
-      Automation-first QA; in-house test framework, device farm, test case management and
+      Test pyramid strategy, shifting coverage from E2E to integration and unit tests; in-house
+      test framework, device farm, test case management and
       metrics dashboards replacing third-party SaaS; test runs in GitHub Actions
   - name: Engineering
     items: >-
@@ -93,8 +94,17 @@ experience:
             Grew and led a QA-only organization of **41 engineers** (3 QA managers, 8 direct
             reports) at peak.
           - >-
-            Raised automation coverage to **92%** across **23K** test cases (Appium Android,
-            Selenium Web, Rest Assured API) and cut the flaky-test rate from **30%** to **4%**.
+            Helped open the Palestine tech lab to hire the strong talent found there, and brought
+            on Russian contractors who stayed **4** years; worked with tech labs in India and
+            Vietnam and with teams in Singapore.
+          - >-
+            Reshaped an E2E-heavy suite into a test pyramid: E2E (Appium, Selenium) only for
+            high-priority flows, the rest as cheaper integration and unit tests. Engineers gained
+            time to keep the suite healthy, so runs proved critical flows instead of leaving
+            hundreds of failures to triage.
+          - >-
+            Cut the flaky-test rate from **30%** to **4%** by hardening E2E tests: retries,
+            fallback element locators, and OTP-free test logins agreed with engineering teams.
           - >-
             Cut regression runtime from **4h** to **0.5–1h** with containerized parallel
             execution and multithreading in Bamboo CI/CD.
@@ -102,15 +112,12 @@ experience:
             Built an internal device farm running **28** parallel mobile tests on a customized
             build of open-source STF (Smartphone Test Farm).
           - >-
-            Shipped internal tools (bulk test data generators and cleaners, Kafka message
-            inspector, automated onboarding) that cut manual test-data setup, debugging and
-            onboarding effort.
+            Shipped internal tools (test data generators and cleaners, Kafka message inspector,
+            onboarding automation, Python scripts for Allure reports) that cut setup, debugging
+            and onboarding effort.
           - >-
-            Wrote ad-hoc Python scripts for the team: test data preparation, test report
-            analysis, and spreadsheets generated from Allure results.
-          - >-
-            Set QA workflow guidelines and test strategy, and ran performance reviews,
-            calibration and promotions for the organization.
+            Set QA workflow guidelines and test strategy; ran performance reviews, calibration
+            and promotions.
 
       - title: Senior Software Engineer
         tag: Backend
@@ -122,8 +129,8 @@ experience:
             led **5 engineers** on the Middle Mile service, which runs connectivity between
             warehouses.
           - >-
-            Delivered the inter-warehouse network project, linking warehouses and separating
-            main hubs from stations.
+            Delivered the inter-warehouse network, linking warehouses and separating main hubs
+            from stations.
           - >-
             Architected reporting microservices and ETL batch pipelines for customer financial
             reconciliation, delivering accurate, configurable and reliable reports.
@@ -134,8 +141,7 @@ experience:
         end: Jul 2018
         bullets:
           - >-
-            Worked as a frontend engineer, building and maintaining web application features in
-            PHP and AngularJS.
+            Built and maintained web application features in PHP and AngularJS.
 
       - title: QA Automation Engineer
         start: Apr 2016
