@@ -7,7 +7,7 @@ meta:
 
 basics:
   name: Felix Soewito
-  headline: Engineering Leader · QA, Backend, Mobile and Web
+  headline: Engineering Leader · Software Development & Quality Engineering
   location: Jakarta, Indonesia
   email: felix.soewito@gmail.com
   links:
@@ -16,18 +16,19 @@ basics:
 
 summary: >-
   Engineering leader with 10+ years in logistics technology at Ninja Van, from QA automation
-  engineer to Head of Engineering. Built and led a 41-person QA organization, then led QA across
-  Indonesia and Vietnam and all engineering in Indonesia. Combines hands-on technical depth with
-  people leadership; led an AI-assisted workflow rollout that cut cycle times by up to 75%.
+  engineer to Head of Engineering reporting to the CTO. Led all engineering in Indonesia, owning
+  10+ microservices across sorting and middle mile, while heading QA in Indonesia and Vietnam
+  (41 QA engineers at peak). Backend roots in middle-mile systems serving 1M+ parcels per day
+  across 5 countries. Led an AI-assisted workflow rollout that cut cycle times by up to 67%.
 
 highlights:
-  - value: "41"
-    label: QA engineers at peak, incl. 3 managers
-  - value: "6"
-    label: "countries of tech teams: Indonesia, Vietnam, India, Palestine, Russia, Singapore"
+  - value: 1M+
+    label: parcels per day served by Middle Mile systems across 5 countries
+  - value: 10+
+    label: microservices owned across sorting and middle mile
   - value: 30% → 4%
     label: flaky-test rate after a test-pyramid reshape and E2E hardening
-  - value: 75%
+  - value: 67%
     label: max cycle-time cut from AI-assisted workflows
 
 skills:
@@ -45,10 +46,14 @@ skills:
       Release management across mobile, backend and web; integration testing; custom two-factor
       authentication for internal software; remote management of warehouse DWS
       (dimension-weight scanning) machines
+  - name: Tech stack
+    items: >-
+      Java, Go, Kafka, MySQL, TiDB, Grafana, Kibana, Quickwit
   - name: AI tooling
     items: >-
       Claude Code, Antigravity, Claude Design; custom agent skills that standardize AI output;
-      MCP servers for AI-assisted debugging; custom design system
+      MCP servers for AI-assisted debugging; custom design system; Gemini-based RAG agent with
+      custom skills and tools for L1 production support
 
 experience:
   - name: Ninja Van
@@ -64,27 +69,39 @@ experience:
           - >-
             Took on all engineering in Indonesia, reporting to the CTO, while leading QA in
             Indonesia and Vietnam: **36 people** (24 QA, 4 QA managers, 1 engineering manager,
-            5 developers, 2 designers).
+            5 developers, 2 designers). After the Vietnam site closed in 2025, led the remaining
+            **25** (16 QA, 3 QA managers, 6 developers).
           - >-
-            After the Vietnam site closed in 2025, led the remaining **25-person** team (16 QA,
-            3 QA managers, 6 developers); owned Ops Hub development and QA across all **5**
-            product systems.
+            Owned Ops Hub, the sorting and middle-mile product and one of Ninja Van's **5**
+            product systems: **10+ microservices** in Go and Java on Kafka, MySQL and TiDB.
+            Planned and broke down the work, delegated it across engineers, and owned delivery;
+            also owned QA across all **5** product systems.
+          - >-
+            Set incident SLAs of **2 hours** for ops-blocking issues and **3 days** for
+            non-blocking ones; from Jul to Nov 2026 the team resolved **100%** of 16–31 tickets a
+            month within SLA. Every incident went back to the owning team for RCA, presented to
+            the whole engineering team for transparency and accountability.
+          - >-
+            Built a Gemini-based L1 support agent that reads issues the ops team posts in Google
+            Chat and checks them against the runbooks (RAG). It applies the runbook fix itself
+            for known issues and hands the rest to an engineer with a summary.
           - >-
             Rolled out AI-assisted tooling and automated workflows across **5 teams**, cutting
-            design, test and implementation cycle times by **up to 75%** (e.g. technical design
+            design, test and implementation cycle times by **up to 67%** (e.g. technical design
             docs from 3 days to 1).
+          - >-
+            Worked with the business team to guide partner companies through integration with
+            Ninja Van.
           - >-
             Redesigned data retention policies for the Middle Mile service, cutting storage cost
             by **70%**.
           - >-
             Kept escaped defects at **near zero** per release as QA shrank from **41 to 19**
-            people, matching test scope to a slower, maintenance-mode delivery pace.
+            (16 QA, 3 QA managers), matching test scope to a slower, maintenance-mode delivery
+            pace.
           - >-
             Built an in-house test case management system that replaced SmartBear
             CucumberStudio, saving **$23K** per year.
-          - >-
-            Partnered with product, ops and regional teams on the architecture of
-            high-reliability systems across Ninja Van's platforms.
 
       - title: QA Manager
         start: May 2020
@@ -125,9 +142,10 @@ experience:
         end: Apr 2020
         bullets:
           - >-
-            Moved from frontend to backend development, handing frontend work to the team, and
-            led **5 engineers** on the Middle Mile service, which runs connectivity between
-            warehouses.
+            Moved from frontend to backend and led **5 engineers** on the Middle Mile service,
+            which connects warehouses and handles **1M+ parcels per day** across Singapore,
+            Indonesia, Malaysia, Vietnam and the Philippines (Java, Kafka, MySQL, TiDB, Grafana,
+            Kibana).
           - >-
             Delivered the inter-warehouse network, linking warehouses and separating main hubs
             from stations.

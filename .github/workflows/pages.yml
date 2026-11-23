@@ -1,4 +1,5 @@
-# Build cv.yaml into index.html + cv.pdf and publish them to GitHub Pages.
+# Build the tabbed site (cv.dev.yaml + cv.qa.yaml) and publish dist/ to GitHub Pages.
+# The master cv.yaml is not built here, so it is never published.
 name: Deploy CV to Pages
 
 on:

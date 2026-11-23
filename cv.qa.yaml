@@ -1,0 +1,177 @@
+# QA-focused version of cv.yaml (the master). Edit the master first, then carry changes here.
+# CV content. Edit this file, then run `npm run build`.
+# Text fields support **bold** for emphasis (use it for numbers).
+# Lists are newest first.
+
+meta:
+  accent: "#1D4E89"   # try #0F5C4E (teal), #7A2E3A (burgundy), #2B2F36 (charcoal)
+
+basics:
+  name: Felix Soewito
+  headline: Engineering Leader · Quality Engineering and Test Automation
+  location: Jakarta, Indonesia
+  email: felix.soewito@gmail.com
+  links:
+    - label: linkedin.com/in/felix-soewito
+      url: https://www.linkedin.com/in/felix-soewito/
+
+summary: >-
+  Engineering leader with 10+ years in logistics technology at Ninja Van, from QA automation
+  engineer to Head of Engineering and QA reporting to the CTO. Built and led a 41-person QA
+  organization, reshaped testing into a pyramid that cut flaky tests from 30% to 4%, and replaced
+  third-party SaaS with in-house tooling. Backend background in middle-mile systems serving 1M+
+  parcels per day. Led an AI-assisted workflow rollout that cut cycle times by up to 67%.
+
+highlights:
+  - value: "41"
+    label: QA engineers at peak, incl. 3 managers
+  - value: 30% → 4%
+    label: flaky-test rate after a test-pyramid reshape and E2E hardening
+  - value: 4h → 1h
+    label: regression runtime with containerized parallel execution
+  - value: $23K
+    label: saved per year by replacing SaaS test management in-house
+
+skills:
+  - name: Leadership
+    items: >-
+      Roadmap, KPI and budget ownership; build-vs-buy decisions and SaaS vendor negotiation;
+      org design, hiring, performance calibration; incident SLAs and RCA reviews
+  - name: Quality engineering
+    items: >-
+      Test pyramid strategy, shifting coverage from E2E to integration and unit tests; in-house
+      test framework, device farm, test case management and metrics dashboards replacing
+      third-party SaaS; test runs in GitHub Actions
+  - name: Test automation
+    items: >-
+      Java, Python, Cucumber, Selenium, Appium, Rest Assured, STF, Allure, Bamboo, GitHub Actions
+  - name: AI tooling
+    items: >-
+      Claude Code, custom agent skills that standardize AI output; MCP servers for AI-assisted
+      debugging; Gemini-based RAG agent for L1 production support
+  - name: Tech stack
+    items: >-
+      Java, Go, Kafka, MySQL, TiDB, Grafana, Kibana, Quickwit
+
+experience:
+  - name: Ninja Van
+    location: Jakarta, Indonesia
+    period: 2016 – 2026
+    showPath: true
+    roles:
+      - title: Head of Engineering, Indonesia Tech Lab
+        tag: also Head of QA
+        start: Jul 2024
+        end: Nov 2026
+        bullets:
+          - >-
+            Took on all engineering in Indonesia, reporting to the CTO, while leading QA in
+            Indonesia and Vietnam: **36 people** (24 QA, 4 QA managers, 1 engineering manager,
+            5 developers, 2 designers). After the Vietnam site closed in 2025, led the remaining
+            **25** (16 QA, 3 QA managers, 6 developers).
+          - >-
+            Owned QA across all **5** product systems, plus delivery of Ops Hub, the sorting and
+            middle-mile product: **10+ microservices** in Go and Java on Kafka, MySQL and TiDB.
+          - >-
+            Set incident SLAs of **2 hours** for ops-blocking issues and **3 days** for
+            non-blocking ones; from Jul to Nov 2026 the team resolved **100%** of 16–31 tickets a
+            month within SLA. Every incident went back to the owning team for RCA, presented to
+            the whole engineering team for transparency and accountability.
+          - >-
+            Rolled out AI-assisted tooling and automated workflows across **5 teams**, cutting
+            design, test and implementation cycle times by **up to 67%** (e.g. technical design
+            docs from 3 days to 1).
+          - >-
+            Kept escaped defects at **near zero** per release as QA shrank from **41 to 19**
+            (16 QA, 3 QA managers), matching test scope to a slower, maintenance-mode delivery
+            pace.
+          - >-
+            Built an in-house test case management system that replaced SmartBear
+            CucumberStudio, saving **$23K** per year.
+
+      - title: QA Manager
+        start: May 2020
+        end: Jul 2024
+        bullets:
+          - >-
+            Grew and led a QA-only organization of **41 engineers** (3 QA managers, 8 direct
+            reports) at peak.
+          - >-
+            Helped open the Palestine tech lab and brought on Russian contractors who stayed **4**
+            years; worked with tech labs in India and Vietnam and teams in Singapore.
+          - >-
+            Reshaped an E2E-heavy suite into a test pyramid: E2E (Appium, Selenium) only for
+            high-priority flows, the rest as integration and unit tests, so runs proved critical
+            flows instead of leaving hundreds of failures to triage.
+          - >-
+            Cut the flaky-test rate from **30%** to **4%** by hardening E2E tests: retries,
+            fallback element locators, and OTP-free test logins agreed with engineering teams.
+          - >-
+            Cut regression runtime from **4h** to **0.5–1h** with containerized parallel
+            execution and multithreading in Bamboo CI/CD.
+          - >-
+            Built an internal device farm running **28** parallel mobile tests on a customized
+            build of open-source STF (Smartphone Test Farm).
+          - >-
+            Shipped internal tools (test data generators and cleaners, Kafka message inspector,
+            onboarding automation, Python scripts for Allure reports) that cut setup, debugging
+            and onboarding effort.
+          - >-
+            Set QA workflow guidelines and test strategy; ran performance reviews, calibration
+            and promotions.
+
+      - title: Senior Software Engineer
+        tag: Backend
+        start: Aug 2018
+        end: Apr 2020
+        bullets:
+          - >-
+            Moved from frontend to backend and led **5 engineers** on the Middle Mile service,
+            which connects warehouses and handles **1M+ parcels per day** across 5 countries
+            (Java, Kafka, MySQL, TiDB).
+          - >-
+            Delivered the inter-warehouse network, linking warehouses and separating main hubs
+            from stations.
+
+      - title: Software Engineer
+        tag: Frontend
+        start: Oct 2016
+        end: Jul 2018
+        bullets:
+          - >-
+            Built and maintained web application features in PHP and AngularJS.
+
+      - title: QA Automation Engineer
+        start: Apr 2016
+        end: Oct 2016
+        bullets:
+          - >-
+            Built a custom test automation framework in Java with Cucumber, Selenium, Appium and
+            Rest Assured, running web, mobile and API tests in Bamboo CI/CD.
+
+  - name: Kartuku
+    location: Jakarta, Indonesia
+    period: 2015 – 2016
+    roles:
+      - title: Software Engineer
+        start: "2015"
+        end: "2016"
+        bullets:
+          - >-
+            Built Electronic Data Capture (EDC) payment terminal software with the Ingenico SDK
+            and payment gateway integrations in Java Spring Boot.
+
+education:
+  - school: Bandung Institute of Technology
+    degree: B.Eng., Electronics Engineering
+    detail: GPA 3.82 / 4.00
+    start: "2010"
+    end: "2015"
+
+talks:
+  - title: Career Strategy
+    venue: Generasi Gigih
+    year: 2022
+  - title: All about Kafka
+    venue: ITB career
+    year: 2019

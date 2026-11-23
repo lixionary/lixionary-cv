@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsx src/build.ts",
+    "build:master": "tsx src/build.ts cv.yaml",
     "html": "tsx src/build.ts --html-only",
     "dev": "tsx src/build.ts --html-only --watch",
     "check": "tsc --noEmit",

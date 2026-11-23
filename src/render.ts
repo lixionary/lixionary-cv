@@ -148,25 +148,101 @@ function educationAndTalks(cv: CV): string {
   return `<div class="edu-talks">${edu}${talks}\n</div>`;
 }
 
-export function renderHtml(cv: CV, opts: { css: string; fontCss: string }): string {
+/** The white A4 sheet for one CV. */
+export function renderSheet(cv: CV, attrs = ""): string {
+  return `<main class="sheet"${attrs}>
+${join([masthead(cv), summary(cv), highlights(cv), skills(cv), experience(cv), educationAndTalks(cv)])}
+</main>`;
+}
+
+function head(title: string, description: string | undefined, accent: string, opts: { css: string; fontCss: string }): string {
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${escape(cv.basics.name)} · CV</title>
-${cv.basics.headline ? `<meta name="description" content="${escape(cv.basics.name)}: ${escape(cv.basics.headline)}">` : ""}
+<title>${escape(title)}</title>
+${description ? `<meta name="description" content="${escape(description)}">` : ""}
 <style>
 ${opts.fontCss}
 ${opts.css}
-:root { --accent: ${cv.meta.accent}; }
+:root { --accent: ${accent}; }
 </style>
-</head>
+</head>`;
+}
+
+/** One CV on its own page; this is also what the PDF is printed from. */
+export function renderHtml(cv: CV, opts: { css: string; fontCss: string; pdfHref: string }): string {
+  const b = cv.basics;
+  return `${head(`${b.name} · CV`, b.headline && `${b.name}: ${b.headline}`, cv.meta.accent, opts)}
 <body>
-<nav class="toolbar"><a href="cv.pdf" download>Download PDF</a></nav>
-<main class="sheet">
-${join([masthead(cv), summary(cv), highlights(cv), skills(cv), experience(cv), educationAndTalks(cv)])}
-</main>
+<nav class="toolbar"><a href="${escape(opts.pdfHref)}" download>Download PDF</a></nav>
+${renderSheet(cv)}
+</body>
+</html>
+`;
+}
+
+export interface Tab {
+  id: string;
+  label: string;
+  cv: CV;
+  pdfHref: string;
+}
+
+/** Several CVs on one page, one tab each. The URL hash (#dev, #qa) picks the tab, so each is linkable. */
+export function renderTabbedHtml(tabs: Tab[], opts: { css: string; fontCss: string }): string {
+  const first = tabs[0];
+  const b = first.cv.basics;
+  const buttons = tabs
+    .map(
+      (t, i) =>
+        `<button type="button" role="tab" id="tab-${escape(t.id)}" aria-controls="cv-${escape(t.id)}" aria-selected="${i === 0}" data-tab="${escape(t.id)}" data-pdf="${escape(t.pdfHref)}">${escape(t.label)}</button>`,
+    )
+    .join("\n    ");
+  const sheets = tabs
+    .map((t, i) =>
+      renderSheet(t.cv, ` id="cv-${escape(t.id)}" role="tabpanel" aria-labelledby="tab-${escape(t.id)}"${i === 0 ? "" : " hidden"}`),
+    )
+    .join("\n");
+  return `${head(`${b.name} · CV`, `${b.name}: CV`, first.cv.meta.accent, opts)}
+<body>
+<nav class="toolbar tabbed">
+  <div class="tabs" role="tablist" aria-label="CV version">
+    ${buttons}
+  </div>
+  <a id="pdf-link" href="${escape(first.pdfHref)}" download>Download PDF</a>
+</nav>
+${sheets}
+<script>
+(() => {
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  const pdf = document.getElementById("pdf-link");
+  const show = (id, push) => {
+    const tab = tabs.find((t) => t.dataset.tab === id) ?? tabs[0];
+    for (const t of tabs) {
+      const on = t === tab;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    }
+    pdf.href = tab.dataset.pdf;
+    if (push) history.replaceState(null, "", "#" + tab.dataset.tab);
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => show(t.dataset.tab, true));
+    t.addEventListener("keydown", (e) => {
+      const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!step) return;
+      const next = tabs[(i + step + tabs.length) % tabs.length];
+      show(next.dataset.tab, true);
+      next.focus();
+    });
+  });
+  addEventListener("hashchange", () => show(location.hash.slice(1), false));
+  show(location.hash.slice(1), false);
+})();
+</script>
 </body>
 </html>
 `;

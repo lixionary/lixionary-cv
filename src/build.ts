@@ -1,13 +1,17 @@
 /**
  * Build the CV.
  *
- *   npm run build            cv.yaml → dist/index.html + dist/cv.pdf
- *   npm run html             HTML only (no browser needed)
- *   npm run dev              HTML only, rebuilt on every save of cv.yaml or src/
+ *   npm run build            the published site: cv.dev.yaml + cv.qa.yaml →
+ *                            dist/index.html (tabs), dist/cv.dev.{html,pdf}, dist/cv.qa.{html,pdf},
+ *                            and dist/cv.pdf (a copy of the default tab's PDF, so old links keep working)
+ *   npm run build:master     cv.yaml (the master) → dist/master.html + dist/master.pdf (not published)
+ *   npm run html             site HTML only (no browser needed)
+ *   npm run dev              site HTML only, rebuilt on every save of a YAML file or src/
  *
- * Pass another YAML file as the first argument: `npx tsx src/build.ts other.yaml`.
+ * Pass a YAML file as the first argument to build just that file:
+ * `npx tsx src/build.ts other.yaml` → dist/other.html + dist/other.pdf.
  */
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import { watch } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
@@ -15,12 +19,18 @@ import { fileURLToPath } from "node:url";
 import { parse } from "yaml";
 import { ZodError } from "zod";
 import { cvSchema, type CV } from "./schema.js";
-import { escapeHtml, footerText, renderHtml } from "./render.js";
+import { escapeHtml, footerText, renderHtml, renderTabbedHtml } from "./render.js";
+
+/** The tabs on the published page, in order. The first is the default. */
+const SITE_TABS = [
+  { id: "dev", label: "Software Development", file: "cv.dev.yaml" },
+  { id: "qa", label: "Quality Engineering", file: "cv.qa.yaml" },
+];
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
 const flags = new Set(args.filter((a) => a.startsWith("--")));
-const input = path.resolve(root, args.find((a) => !a.startsWith("--")) ?? "cv.yaml");
+const single = args.find((a) => !a.startsWith("--"));
 const outDir = path.join(root, "dist");
 const require = createRequire(import.meta.url);
 
@@ -36,39 +46,34 @@ async function fontCss(): Promise<string> {
   return faces.join("\n");
 }
 
-async function load(): Promise<CV> {
-  const raw = parse(await readFile(input, "utf8"));
+async function load(file: string): Promise<CV> {
+  const raw = parse(await readFile(file, "utf8"));
   try {
     return cvSchema.parse(raw);
   } catch (err) {
     if (err instanceof ZodError) {
       const lines = err.issues.map((i) => `  • ${i.path.join(".") || "(root)"}: ${i.message}`);
-      throw new Error(`${path.basename(input)} is invalid:\n${lines.join("\n")}`);
+      throw new Error(`${path.basename(file)} is invalid:\n${lines.join("\n")}`);
     }
     throw err;
   }
 }
 
-async function buildHtml(): Promise<{ cv: CV; html: string; file: string }> {
-  const cv = await load();
-  const css = await readFile(path.join(root, "src/styles.css"), "utf8");
-  const html = renderHtml(cv, { css, fontCss: await fontCss() });
-  await mkdir(outDir, { recursive: true });
-  const file = path.join(outDir, "index.html");
-  await writeFile(file, html);
-  return { cv, html, file };
+/** dist name for a YAML file: cv.yaml is the master, anything else keeps its own name. */
+function outName(file: string): string {
+  const base = path.basename(file).replace(/\.ya?ml$/i, "");
+  return base === "cv" ? "master" : base;
 }
 
-async function buildPdf(cv: CV, htmlFile: string): Promise<string> {
+async function buildPdf(cv: CV, htmlFile: string, pdfFile: string): Promise<void> {
   const { chromium } = await import("playwright");
   const browser = await chromium.launch();
   try {
     const page = await browser.newPage();
     await page.goto(`file://${htmlFile}`, { waitUntil: "load" });
     await page.evaluate(() => document.fonts.ready);
-    const file = path.join(outDir, "cv.pdf");
     await page.pdf({
-      path: file,
+      path: pdfFile,
       preferCSSPageSize: true,
       printBackground: true,
       displayHeaderFooter: true,
@@ -80,18 +85,51 @@ async function buildPdf(cv: CV, htmlFile: string): Promise<string> {
           <span><span class="pageNumber"></span> / <span class="totalPages"></span></span>
         </div>`,
     });
-    return file;
   } finally {
     await browser.close();
   }
 }
 
+/** One YAML file → <name>.html (+ <name>.pdf). */
+async function buildOne(file: string, assets: { css: string; fontCss: string }): Promise<{ cv: CV; made: string[] }> {
+  const cv = await load(file);
+  const name = outName(file);
+  const htmlFile = path.join(outDir, `${name}.html`);
+  const pdfFile = path.join(outDir, `${name}.pdf`);
+  await writeFile(htmlFile, renderHtml(cv, { ...assets, pdfHref: `${name}.pdf` }));
+  const made = [htmlFile];
+  if (!flags.has("--html-only")) {
+    await buildPdf(cv, htmlFile, pdfFile);
+    made.push(pdfFile);
+  }
+  return { cv, made };
+}
+
 async function run(): Promise<void> {
   const started = Date.now();
-  const { cv, file } = await buildHtml();
-  const made = [path.relative(root, file)];
-  if (!flags.has("--html-only")) made.push(path.relative(root, await buildPdf(cv, file)));
-  console.log(`✓ ${made.join(" + ")} (${Date.now() - started} ms)`);
+  await mkdir(outDir, { recursive: true });
+  const assets = { css: await readFile(path.join(root, "src/styles.css"), "utf8"), fontCss: await fontCss() };
+  const made: string[] = [];
+
+  if (single) {
+    made.push(...(await buildOne(path.resolve(root, single), assets)).made);
+  } else {
+    const tabs = [];
+    for (const t of SITE_TABS) {
+      const { cv, made: files } = await buildOne(path.join(root, t.file), assets);
+      made.push(...files);
+      tabs.push({ id: t.id, label: t.label, cv, pdfHref: `${outName(t.file)}.pdf` });
+    }
+    const index = path.join(outDir, "index.html");
+    await writeFile(index, renderTabbedHtml(tabs, assets));
+    made.unshift(index);
+    if (!flags.has("--html-only")) {
+      const alias = path.join(outDir, "cv.pdf");
+      await copyFile(path.join(outDir, tabs[0].pdfHref), alias);
+      made.push(alias);
+    }
+  }
+  console.log(`✓ ${made.map((f) => path.relative(root, f)).join(" + ")} (${Date.now() - started} ms)`);
 }
 
 async function runSafely(): Promise<void> {
@@ -106,12 +144,13 @@ async function runSafely(): Promise<void> {
 await runSafely();
 
 if (flags.has("--watch")) {
-  console.log(`Watching ${path.relative(root, input)} and src/ — open dist/index.html and refresh after saving.`);
+  const inputs = single ? [path.resolve(root, single)] : SITE_TABS.map((t) => path.join(root, t.file));
+  console.log(`Watching ${inputs.map((f) => path.relative(root, f)).join(", ")} and src/ — open dist/index.html and refresh after saving.`);
   let timer: NodeJS.Timeout | undefined;
   const rebuild = () => {
     clearTimeout(timer);
     timer = setTimeout(runSafely, 100);
   };
-  watch(input, rebuild);
+  for (const f of inputs) watch(f, rebuild);
   watch(path.join(root, "src"), rebuild);
 }

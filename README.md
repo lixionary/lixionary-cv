@@ -1,8 +1,8 @@
 # lixionary-cv
 
-My CV as data. Edit `cv.yaml`, run one command, get a styled A4 PDF and a self-contained HTML page.
+My CV as data. Edit the YAML, run one command, get styled A4 PDFs and a self-contained HTML page.
 
-Live: https://cv.lixionary.com/ (PDF: https://cv.lixionary.com/cv.pdf). Every push to `main` rebuilds and redeploys it via `.github/workflows/pages.yml`.
+Live: https://cv.lixionary.com/ with two tabs, linkable as `#dev` and `#qa`. PDFs: https://cv.lixionary.com/cv.dev.pdf and https://cv.lixionary.com/cv.qa.pdf (`cv.pdf` still works and serves the dev version). Every push to `main` rebuilds and redeploys it via `.github/workflows/pages.yml`.
 
 ```
 cv.yaml ──▶ src/schema.ts (validate) ──▶ src/render.ts + src/styles.css ──▶ dist/index.html ──▶ Playwright ──▶ dist/cv.pdf
@@ -19,14 +19,23 @@ npm run setup     # one-time: downloads Chromium for PDF export
 
 ## Commands
 
-| Command          | What it does                                                        |
-| ---------------- | ------------------------------------------------------------------- |
-| `npm run build`  | `cv.yaml` → `dist/index.html` + `dist/cv.pdf`                       |
-| `npm run html`   | HTML only (no browser needed)                                       |
-| `npm run dev`    | HTML only, rebuilt on every save; open `dist/index.html` and refresh |
-| `npm run check`  | Type-check the TypeScript                                           |
+| Command                | What it does                                                                 |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| `npm run build`        | The published site: `cv.dev.yaml` + `cv.qa.yaml` → `dist/index.html` (tabs), `dist/cv.dev.{html,pdf}`, `dist/cv.qa.{html,pdf}`, `dist/cv.pdf` (copy of dev) |
+| `npm run build:master` | `cv.yaml` → `dist/master.html` + `dist/master.pdf` (local only, never published) |
+| `npm run html`         | Site HTML only (no browser needed)                                           |
+| `npm run dev`          | Site HTML only, rebuilt on every save; open `dist/index.html` and refresh    |
+| `npm run check`        | Type-check the TypeScript                                                    |
 
-Use another content file with `npx tsx src/build.ts path/to/other.yaml`, e.g. a version tailored to one job.
+Build any single file with `npx tsx src/build.ts path/to/other.yaml` → `dist/other.html` + `dist/other.pdf`. The tabs (order, labels, files) are `SITE_TABS` in `src/build.ts`; the first tab is the default.
+
+## Versions
+
+- `cv.yaml`: the master. Everything goes here first; it may run past 2 pages and is not published.
+- `cv.dev.yaml`: for engineering-manager roles. Leads with backend ownership, scale, incidents and AI; trims QA detail.
+- `cv.qa.yaml`: for QA / quality-engineering leadership roles. Leads with QA org, test strategy and tooling; trims backend detail.
+
+The variants are full copies, not overlays: after changing the master, carry the change into each variant and check that both still fit 2 pages.
 
 ## Editing `cv.yaml`
 
@@ -41,7 +50,7 @@ Use another content file with `npx tsx src/build.ts path/to/other.yaml`, e.g. a 
 
 - Page size and printed margins live in `@page` in `src/styles.css`. The PDF footer (name, page x / y) is drawn by `src/build.ts`.
 - Page breaks are automatic. Bullets never split across pages, and a role or company heading never ends a page on its own.
-- Keep it to 2 pages: after a content change, check the PDF's page count. If it spills onto a third page, cut words before shrinking type.
+- Keep the dev and QA versions to 2 pages: after a content change, check the PDF's page count. If it spills onto a third page, cut words before shrinking type.
 - Inter is embedded from `@fontsource/inter`, so the PDF and HTML look the same on any machine and need no network.
 
 ## Privacy
