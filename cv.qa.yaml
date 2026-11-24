@@ -20,7 +20,7 @@ summary: >-
   engineer to Head of Engineering and QA reporting to the CTO. Built and led a 41-person QA
   organization, reshaped testing into a pyramid that cut flaky tests from 30% to 4%, and replaced
   third-party SaaS with in-house tooling. Backend background in middle-mile systems serving 1M+
-  parcels per day. Led an AI-assisted workflow rollout that cut cycle times by up to 67%.
+  parcels per day. Led an AI-assisted workflow rollout that cut cycle times by 67% on average.
 
 highlights:
   - value: "41"
@@ -73,14 +73,15 @@ experience:
             Owned QA across all **5** product systems, plus delivery of Ops Hub, the sorting and
             middle-mile product: **10+ microservices** in Go and Java on Kafka, MySQL and TiDB.
           - >-
-            Set incident SLAs of **2 hours** for ops-blocking issues and **3 days** for
-            non-blocking ones; from Jul to Nov 2026 the team resolved **100%** of 16–31 tickets a
-            month within SLA. Every incident went back to the owning team for RCA, presented to
-            the whole engineering team for transparency and accountability.
+            After a further retrenchment in Jul 2026, introduced a ticket SLA KPI to keep the
+            smaller team accountable for production issues: **2 hours** if ops-blocking, **3 days**
+            otherwise. From Jul to Nov 2026 the team resolved **100%** of 16–31 tickets a month
+            within SLA; each incident got an RCA from the owning team, presented to all of
+            engineering.
           - >-
             Rolled out AI-assisted tooling and automated workflows across **5 teams**, cutting
-            design, test and implementation cycle times by **up to 67%** (e.g. technical design
-            docs from 3 days to 1).
+            design, test and implementation cycle times by **67%** on average (e.g. technical
+            design docs from 3 days to 1).
           - >-
             Kept escaped defects at **near zero** per release as QA shrank from **41 to 19**
             (16 QA, 3 QA managers), matching test scope to a slower, maintenance-mode delivery
@@ -88,6 +89,10 @@ experience:
           - >-
             Built an in-house test case management system that replaced SmartBear
             CucumberStudio, saving **$23K** per year.
+          - >-
+            Owned the warehouse DWS (dimension-weight scanning) machines and their vendors:
+            managed the machines remotely, made build-vs-buy decisions and negotiated SaaS vendor
+            contracts.
 
       - title: QA Manager
         start: May 2020

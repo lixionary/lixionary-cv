@@ -20,7 +20,7 @@ summary: >-
   Engineering reporting to the CTO. Owned 10+ microservices across sorting and middle mile, with
   backend roots in middle-mile systems serving 1M+ parcels per day across 5 countries. Runs teams on
   clear incident SLAs, RCA culture and strong test discipline from years leading QA. Led an
-  AI-assisted workflow rollout that cut cycle times by up to 67%.
+  AI-assisted workflow rollout that cut cycle times by 67% on average.
 
 highlights:
   - value: 1M+
@@ -30,7 +30,7 @@ highlights:
   - value: 70%
     label: storage cost cut by redesigning Middle Mile data retention
   - value: 67%
-    label: max cycle-time cut from AI-assisted workflows
+    label: average cycle-time cut from AI-assisted workflows
 
 skills:
   - name: Leadership
@@ -40,8 +40,7 @@ skills:
   - name: Engineering
     items: >-
       Microservices, event-driven systems and batch pipelines; release management across mobile,
-      backend and web; custom two-factor authentication for internal software; remote management
-      of warehouse DWS (dimension-weight scanning) machines
+      backend and web; custom two-factor authentication for internal software
   - name: Tech stack
     items: >-
       Java, Go, Kafka, MySQL, TiDB, Grafana, Kibana, Quickwit
@@ -75,18 +74,23 @@ experience:
             Planned and broke down the work, delegated it across engineers, and owned delivery;
             also owned QA across all **5** product systems.
           - >-
-            Set incident SLAs of **2 hours** for ops-blocking issues and **3 days** for
-            non-blocking ones; from Jul to Nov 2026 the team resolved **100%** of 16–31 tickets a
-            month within SLA. Every incident went back to the owning team for RCA, presented to
-            the whole engineering team for transparency and accountability.
+            Owned the warehouse DWS (dimension-weight scanning) machines and their vendors:
+            managed the machines remotely, made build-vs-buy decisions and negotiated SaaS vendor
+            contracts.
+          - >-
+            After a further retrenchment in Jul 2026, introduced a ticket SLA KPI to keep the
+            smaller team accountable for production issues: **2 hours** if ops-blocking, **3 days**
+            otherwise. From Jul to Nov 2026 the team resolved **100%** of 16–31 tickets a month
+            within SLA; each incident got an RCA from the owning team, presented to all of
+            engineering.
           - >-
             Built a Gemini-based L1 support agent that reads issues the ops team posts in Google
             Chat and checks them against the runbooks (RAG). It applies the runbook fix itself
             for known issues and hands the rest to an engineer with a summary.
           - >-
             Rolled out AI-assisted tooling and automated workflows across **5 teams**, cutting
-            design, test and implementation cycle times by **up to 67%** (e.g. technical design
-            docs from 3 days to 1).
+            design, test and implementation cycle times by **67%** on average (e.g. technical
+            design docs from 3 days to 1).
           - >-
             Worked with the business team to guide partner companies through integration with
             Ninja Van.
